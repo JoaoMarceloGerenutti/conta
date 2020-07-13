@@ -24,4 +24,9 @@ public class SavingsAccount extends Account {
 	public void atualizadaSaldo() {
 		saldo += saldo * taxaJuro;
 	}
+	
+	@Override
+	public void saque(double quantidade) {
+		saldo -= quantidade;
+	}
 }

@@ -8,7 +8,18 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-		Account acc = new Account(1001, "Alex", 0.0);
+		Account acc = new Account(1001, "Alex", 1000.0);
+		acc.saque(200.0);
+		System.out.println(acc.getSaldo());
+		
+		Account sacc = new SavingsAccount(1005, "João", 1000.0, 0.01);
+		sacc.saque(200.0);
+		System.out.println(sacc.getSaldo());
+		
+		Account bacc1 = new BusinessAccount(1006, "Julia", 1000.0, 500.0);
+		bacc1.saque(200.0);
+		System.out.println(bacc1.getSaldo());
+		
 		BusinessAccount bacc = new BusinessAccount(1002, "Maria", 0.0, 500.0);
 		
 		//UPCASTING
