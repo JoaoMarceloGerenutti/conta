@@ -31,6 +31,8 @@ public class Program {
 		BusinessAccount acc4 = (BusinessAccount) acc2;
 		acc4.emprestimo(100.0);
 		
+		System.out.println("----------------------------");
+		
 		//BusinessAccount acc5 = (BusinessAccount)acc3; modo errado
 		
 		//Da falso
@@ -46,6 +48,18 @@ public class Program {
 			acc5.atualizadaSaldo();
 			System.out.println("Atualizado!");
 		}
+		
+		System.out.println("----------------------------");
+		System.out.println("Polimorfismo");
+		
+		Account x = new Account(1020, "Julio", 1000.0);
+		Account y = new SavingsAccount(1023, "Maria", 1000.0, 0.01);
+		
+		x.saque(50.0);
+		y.saque(50.0);
+		
+		System.out.println(x.getSaldo());
+		System.out.println(y.getSaldo());
 	}
 
 }
