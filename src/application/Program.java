@@ -1,5 +1,9 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import entities.Account;
 import entities.BusinessAccount;
 import entities.SavingsAccount;
@@ -8,58 +12,28 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-		Account acc = new Account(1001, "Alex", 1000.0);
-		acc.saque(200.0);
-		System.out.println(acc.getSaldo());
+		Locale.setDefault(Locale.US);
 		
-		Account sacc = new SavingsAccount(1005, "João", 1000.0, 0.01);
-		sacc.saque(200.0);
-		System.out.println(sacc.getSaldo());
-		
-		Account bacc1 = new BusinessAccount(1006, "Julia", 1000.0, 500.0);
-		bacc1.saque(200.0);
-		System.out.println(bacc1.getSaldo());
-		
-		BusinessAccount bacc = new BusinessAccount(1002, "Maria", 0.0, 500.0);
-		
-		//UPCASTING
-		Account acc1 = bacc;
-		Account acc2 = new BusinessAccount(1003, "Bob", 0.0, 200.0);
-		Account acc3 = new SavingsAccount(1004, "Anna", 0.0, 0.01);
-		
-		//DOWNCASTING
-		BusinessAccount acc4 = (BusinessAccount) acc2;
-		acc4.emprestimo(100.0);
-		
-		System.out.println("----------------------------");
-		
-		//BusinessAccount acc5 = (BusinessAccount)acc3; modo errado
-		
-		//Da falso
-		if (acc3 instanceof BusinessAccount) {
-			BusinessAccount acc5 = (BusinessAccount) acc3;
-			acc5.emprestimo(200.0);
-			System.out.println("Emprestimo!");
-		}
-		
-		//Da verdadeiro
-		if (acc3 instanceof SavingsAccount) {
-			SavingsAccount acc5 = (SavingsAccount)acc3;
-			acc5.atualizadaSaldo();
-			System.out.println("Atualizado!");
-		}
-		
-		System.out.println("----------------------------");
-		System.out.println("Polimorfismo");
-		
-		Account x = new Account(1020, "Julio", 1000.0);
-		Account y = new SavingsAccount(1023, "Maria", 1000.0, 0.01);
-		
-		x.saque(50.0);
-		y.saque(50.0);
-		
-		System.out.println(x.getSaldo());
-		System.out.println(y.getSaldo());
-	}
+		List<Account> lista = new ArrayList<>();
 
+		lista.add(new SavingsAccount(1001, "Alex", 500.00, 0.01)); 
+		lista.add(new BusinessAccount(1002, "Maria", 1000.00, 400.00));
+		lista.add(new SavingsAccount(1003, "Bob", 300.00, 0.01)); 
+		lista.add(new BusinessAccount(1004, "Ana", 500.00, 500.00));
+		
+		double soma = 0.0;
+		for (Account account : lista) {
+			soma += account.getSaldo();
+		}
+		
+		System.out.printf("Saldo total: %.2f%n", soma);
+		
+		for (Account account : lista) {
+			account.deposito(10.0);
+		}
+		
+		for (Account account : lista) {
+			System.out.printf("Saldo atualizado da conta %d: $ %.2f%n", account.getNumero(), account.getSaldo());
+		}
+	}
 }
